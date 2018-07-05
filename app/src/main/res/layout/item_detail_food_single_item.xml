@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout android:id="@+id/itemDetailFoodSingleItem"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/itemDetailSingleSizePrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="@string/food_detail_price"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/itemDetailFoodRemoveItemSingle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/itemDetailFoodRemoveItemSingle"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/minus_circle"
+        android:backgroundTint="#000"
+        android:contentDescription="@string/remove_item"
+        app:layout_constraintStart_toEndOf="@id/itemDetailSingleSizePrice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/itemDetailFoodItemSingleNumber"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/itemDetailFoodItemSingleNumber"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="@string/item_number_hint"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@id/itemDetailFoodRemoveItemSingle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/itemDetailFoodAddItemSingle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/itemDetailFoodAddItemSingle"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/plus_circle"
+        android:backgroundTint="#000"
+        android:contentDescription="@string/add_item"
+        app:layout_constraintStart_toEndOf="@id/itemDetailFoodItemSingleNumber"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

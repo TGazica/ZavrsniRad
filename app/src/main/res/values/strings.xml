@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">ZavrsniRad</string>
+    <string name="login_email_hint">Enter your e-mail address</string>
+    <string name="login_password_hint">Enter your password</string>
+    <string name="login_button_text">Login</string>
+    <string name="food_image_description">Food image</string>
+    <string name="this_is_the_foods_name">This is the foods name</string>
+    <string name="this_is_the_foods_description">This is the foods description</string>
+    <string name="food_image">Food image</string>
+    <string name="food_name_holder">Food name holder</string>
+    <string name="food_name_goes_here">FOOD NAME GOES HERE</string>
+    <string name="drink_name">drink name</string>
+    <string name="drink_item_add_drink">Drink item add drink</string>
+    <string name="item_number_hint">0</string>
+    <string name="category_name">Category name</string>
+    <string name="food_description_goes_here">FOOD DESCRIPTION GOES HERE</string>
+    <string name="food_detail_size">Size</string>
+    <string name="food_detail_price">Price</string>
+    <string name="food_detail_qty">Qty.</string>
+    <string name="remove_item">Remove item</string>
+    <string name="add_item">Add item</string>
+    <string name="recommended_drinks">Recommended drinks</string>
+    <string name="close_window">Close window</string>
+    <string name="confirm_choice">Confirm choice</string>
+    <string name="no_username_password_error">Please enter email/password</string>
+    <string name="no_internet_error">No internet connection</string>
+    <string name="item_drink_price">$$</string>
+    <string name="wellcome_message">Welcome to our restaurant, please make your order</string>
+    <string name="food">Food</string>
+    <string name="drinks">Drinks</string>
+    <string name="change_language">/</string>
+    <string name="your_foods">Your foods:</string>
+    <string name="your_drinks">Your drinks:</string>
+    <string name="add_order">Add order</string>
+    <string name="cancel_order">Cancel order</string>
+</resources>

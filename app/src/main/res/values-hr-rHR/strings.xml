@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ZavrsniRad</string>
+    <string name="login_email_hint">Unesite e-mail adresu</string>
+    <string name="login_password_hint">Unesite lozinku</string>
+    <string name="login_button_text">Prijava</string>
+    <string name="food_image_description">Slika hrane</string>
+    <string name="this_is_the_foods_name">Ime hrane</string>
+    <string name="this_is_the_foods_description">Opis hrane</string>
+    <string name="food_image">Slika hrane</string>
+    <string name="food_name_holder">Držač imena</string>
+    <string name="food_name_goes_here">IME HRANE</string>
+    <string name="drink_name">ime pića</string>
+    <string name="drink_item_add_drink">Dodaj piće</string>
+    <string name="item_number_hint">0</string>
+    <string name="category_name">Naziv kategorije</string>
+    <string name="food_description_goes_here">OPIS HRANE</string>
+    <string name="food_detail_size">Veličina</string>
+    <string name="food_detail_price">Cijena</string>
+    <string name="food_detail_qty">Kol.</string>
+    <string name="remove_item">Makni</string>
+    <string name="add_item">Dodaj</string>
+    <string name="recommended_drinks">Preporućena pića</string>
+    <string name="close_window">Zatvori</string>
+    <string name="confirm_choice">Potvrdi</string>
+    <string name="no_username_password_error">Unesite email/lozinku</string>
+    <string name="no_internet_error">Nema internetske veze</string>
+    <string name="item_drink_price">$$</string>
+    <string name="wellcome_message">Dobrodošli u naš restoran, molimo napravite narudžbu</string>
+    <string name="food">Hrana</string>
+    <string name="drinks">Pića</string>
+    <string name="change_language">/</string>
+    <string name="your_foods">Vaša hrana:</string>
+    <string name="your_drinks">Vaša pića:</string>
+    <string name="add_order">Dodaj narudžbu</string>
+    <string name="cancel_order">Obriši narudžbu</string>
+</resources>

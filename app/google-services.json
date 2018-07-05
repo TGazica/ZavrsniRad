@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "73847877065",
+    "firebase_url": "https://zavrsnirad-900ea.firebaseio.com",
+    "project_id": "zavrsnirad-900ea",
+    "storage_bucket": "zavrsnirad-900ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73847877065:android:d4c6dcc01a6b1686",
+        "android_client_info": {
+          "package_name": "tomislavgazica.ferit.org.zavrsnirad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73847877065-njeasc3l68v3v0loaug50ea07q92oqj0.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "73847877065-njeasc3l68v3v0loaug50ea07q92oqj0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6UBebV2-vUaw3V16H-F-Zp476BtROTuY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
