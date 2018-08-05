@@ -71,7 +71,9 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
 
     @Override
     public void onNavigationFoodClick() {
-        initFoodMenuFragment();
+        if (!currentMenu.equals(Constants.FIREBASE_FOOD)) {
+            initFoodMenuFragment();
+        }
     }
 
     private void initFoodMenuFragment() {
@@ -89,7 +91,9 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
 
     @Override
     public void onNavigationDrinkClick() {
-        initDrinkFragment();
+        if (!currentMenu.equals(Constants.FIREBASE_DRINK)) {
+            initDrinkFragment();
+        }
     }
 
     private void initDrinkFragment() {
