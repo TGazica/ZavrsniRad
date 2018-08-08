@@ -48,7 +48,7 @@ public class FoodPresenter implements FoodContract.Presenter ,FirebaseCallbacks,
 
     @Override
     public void removeItemFromOrder(String id) {
-        order.removeIdFromOrder(id);
+        order.removeItemFromOrder(id);
     }
 
     @Override

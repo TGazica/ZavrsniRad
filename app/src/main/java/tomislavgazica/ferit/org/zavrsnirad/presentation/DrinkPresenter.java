@@ -48,7 +48,7 @@ public class DrinkPresenter implements DrinkContract.Presenter, FirebaseCallback
 
     @Override
     public void removeDrinkFromOrder(String id) {
-        order.removeIdFromOrder(id);
+        order.removeItemFromOrder(id);
     }
 
     @Override

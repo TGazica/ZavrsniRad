@@ -34,6 +34,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
         presenter = new LoginPresenter();
         presenter.setView(this);
+
+        presenter.signInUser("tomislav.gazica@gmail.com", "tomagazz");
     }
 
     @OnClick(R.id.loginButton)

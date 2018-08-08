@@ -17,8 +17,6 @@ import java.util.List;
 import tomislavgazica.ferit.org.zavrsnirad.Constants;
 import tomislavgazica.ferit.org.zavrsnirad.model.Drink;
 import tomislavgazica.ferit.org.zavrsnirad.model.Food;
-import tomislavgazica.ferit.org.zavrsnirad.model.ItemSize;
-import tomislavgazica.ferit.org.zavrsnirad.model.Order;
 import tomislavgazica.ferit.org.zavrsnirad.model.RecommendedDrinks;
 import tomislavgazica.ferit.org.zavrsnirad.orderManager.OrderManager;
 import tomislavgazica.ferit.org.zavrsnirad.ui.food.itemDetail.ItemDetailContract;
@@ -69,7 +67,7 @@ public class ItemDetailPresenter implements ItemDetailContract.Presenter {
 
     @Override
     public void removeItemFromOrder(String id) {
-        order.removeIdFromOrder(id);
+        order.removeItemFromOrder(id);
         view.setOrder(order.getOrder());
     }
 

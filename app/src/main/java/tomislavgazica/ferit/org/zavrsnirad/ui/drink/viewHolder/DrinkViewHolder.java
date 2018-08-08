@@ -36,21 +36,21 @@ public class DrinkViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void setOnDrinkClickListener(OnDrinkClickListener onDrinkClickListener){
+    public void setOnDrinkClickListener(OnDrinkClickListener onDrinkClickListener) {
         this.onDrinkClickListener = onDrinkClickListener;
     }
 
-    public void setItemDrinkNumberOfDrinks(int numberOfDrinks){
+    public void setItemDrinkNumberOfDrinks(int numberOfDrinks) {
         itemDrinkNumberOfDrinks.setText(String.valueOf(numberOfDrinks));
     }
 
-    public void setDrink(Drink drink){
+    public void setDrink(Drink drink) {
         this.drink = drink;
 
         StringBuilder price = new StringBuilder();
         StringBuilder size = new StringBuilder();
 
-        if (this.drink != null){
+        if (this.drink != null) {
             itemDrinkName.setText(this.drink.getName());
             size.append(this.drink.getSize()).append(" l");
             itemDrinkSize.setText(size.toString());
@@ -60,12 +60,12 @@ public class DrinkViewHolder extends RecyclerView.ViewHolder {
     }
 
     @OnClick(R.id.itemDrinkAddDrink)
-    public void addDrinkToOrder(){
+    public void addDrinkToOrder() {
         onDrinkClickListener.onAddDrinkClick(drink.getId());
     }
 
     @OnClick(R.id.itemDrinkRemoveDrink)
-    public void removeDrinkFromOrder(){
+    public void removeDrinkFromOrder() {
         onDrinkClickListener.onRemoveDrinkClick(drink.getId());
     }
 

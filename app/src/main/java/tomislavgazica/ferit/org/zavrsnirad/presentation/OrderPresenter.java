@@ -49,7 +49,7 @@ public class OrderPresenter implements OrderContract.Presenter ,FirebaseCallback
 
     @Override
     public void removeItemFromOrder(String id) {
-        order.removeIdFromOrder(id);
+        order.removeItemFromOrder(id);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class OrderPresenter implements OrderContract.Presenter ,FirebaseCallback
 
     @Override
     public void removeAllItemIdsFromOrder(String id) {
-        order.removeAllItemIdsFromOrder(id);
+        order.removeAllOfItemFromOrder(id);
     }
 
     @Override

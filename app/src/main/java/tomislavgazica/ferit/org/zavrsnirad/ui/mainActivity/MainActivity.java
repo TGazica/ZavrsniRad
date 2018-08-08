@@ -19,13 +19,6 @@ import tomislavgazica.ferit.org.zavrsnirad.ui.order.fragment.OrderFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationOnClickListener, MainActionListener.Main {
 
-    @BindView(R.id.navigationFrameLayout)
-    FrameLayout navigationFrameLayout;
-    @BindView(R.id.menuFrameLayout)
-    FrameLayout menuFrameLayout;
-    @BindView(R.id.orderFrameLayout)
-    FrameLayout orderFrameLayout;
-
     private NavigationFragment navigationFragment;
     private FoodFragment foodFragment;
     private DrinkFragment drinkFragment;
@@ -71,13 +64,16 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
 
     @Override
     public void onNavigationFoodClick() {
-        if (!currentMenu.equals(Constants.FIREBASE_FOOD)) {
+        if (currentMenu == null){
+            currentMenu = Constants.FIREBASE_FOOD;
+            initFoodMenuFragment();
+        } else if (!currentMenu.equals(Constants.FIREBASE_FOOD)) {
+            currentMenu = Constants.FIREBASE_FOOD;
             initFoodMenuFragment();
         }
     }
 
     private void initFoodMenuFragment() {
-        currentMenu = Constants.FIREBASE_FOOD;
         foodFragment = new FoodFragment();
         foodFragment.setActionListener(this);
 
@@ -91,7 +87,11 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
 
     @Override
     public void onNavigationDrinkClick() {
-        if (!currentMenu.equals(Constants.FIREBASE_DRINK)) {
+        if (currentMenu == null) {
+            currentMenu = Constants.FIREBASE_DRINK;
+            initDrinkFragment();
+        }else if (!currentMenu.equals(Constants.FIREBASE_DRINK)) {
+            currentMenu = Constants.FIREBASE_DRINK;
             initDrinkFragment();
         }
     }

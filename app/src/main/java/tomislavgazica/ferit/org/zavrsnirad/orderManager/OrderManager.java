@@ -31,11 +31,11 @@ public class OrderManager {
         return order;
     }
 
-    public void removeIdFromOrder(String id){
+    public void removeItemFromOrder(String id){
         order.removeItem(id);
     }
 
-    public void removeAllItemIdsFromOrder(String id){
+    public void removeAllOfItemFromOrder(String id){
         order.removeAllItems(id);
     }
 
