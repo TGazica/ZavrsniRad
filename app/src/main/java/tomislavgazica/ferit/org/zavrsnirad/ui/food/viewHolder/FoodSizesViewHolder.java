@@ -33,7 +33,6 @@ public class FoodSizesViewHolder extends RecyclerView.ViewHolder {
     private boolean isSingle;
     private String size;
     private Food food;
-    private int numOfItems;
     private OnFoodSizesClickListener listener;
 
     public void setFood(Food food) {

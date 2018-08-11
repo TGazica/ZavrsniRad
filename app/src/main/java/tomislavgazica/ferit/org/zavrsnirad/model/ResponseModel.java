@@ -32,6 +32,11 @@ public class ResponseModel {
         addTables(dataSnapshot);
         addOrder(dataSnapshot);
         addRecommendedDrinks(dataSnapshot);
+        onDataProcessed();
+    }
+
+    private void onDataProcessed() {
+        responseModelCallbacks.onDataProcessed();
     }
 
     private void addRecommendedDrinks(DataSnapshot dataSnapshot) {

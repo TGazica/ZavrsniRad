@@ -27,8 +27,6 @@ public interface DrinkContract {
         void addDrinkToOrder(String id);
 
         void removeDrinkFromOrder(String id);
-
-        void onDestroy();
     }
 
 }

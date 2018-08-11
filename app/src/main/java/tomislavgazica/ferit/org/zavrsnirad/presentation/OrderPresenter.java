@@ -18,22 +18,17 @@ import tomislavgazica.ferit.org.zavrsnirad.model.Table;
 import tomislavgazica.ferit.org.zavrsnirad.orderManager.OrderManager;
 import tomislavgazica.ferit.org.zavrsnirad.ui.order.fragment.OrderContract;
 
-public class OrderPresenter implements OrderContract.Presenter ,FirebaseCallbacks, ResponseModelCallbacks {
+public class OrderPresenter implements OrderContract.Presenter {
 
     private OrderContract.View view;
-    private FirebaseManager firebaseManager;
-    private ResponseModel responseModel;
     private OrderManager order;
+    private FirebaseManager firebaseManager;
 
     @Override
     public void setView(OrderContract.View view) {
         this.view = view;
         order = OrderManager.getInstance();
-        this.responseModel = new ResponseModel();
-        responseModel.setResponseModelCallbacks(this);
         firebaseManager = FirebaseManager.getInstance();
-        firebaseManager.setFirebaseCallbacks(this);
-        firebaseManager.setListener();
     }
 
 
@@ -67,45 +62,5 @@ public class OrderPresenter implements OrderContract.Presenter ,FirebaseCallback
     @Override
     public void removeAllItemIdsFromOrder(String id) {
         order.removeAllOfItemFromOrder(id);
-    }
-
-    @Override
-    public void onNewItem(DataSnapshot dataSnapshot) {
-        responseModel.addItems(dataSnapshot);
-    }
-
-    @Override
-    public void onFoodUpdated(List<Food> foods) {
-        view.setFoods(foods);
-    }
-
-    @Override
-    public void onDrinkUpdated(List<Drink> drinks) {
-        view.setDrinks(drinks);
-    }
-
-    @Override
-    public void onCategoryUpdated(List<Category> categories) {
-        view.setCategories(categories);
-    }
-
-    @Override
-    public void onItemSizeUpdated(List<ItemSize> itemSizes) {
-        view.setItemSizes(itemSizes);
-    }
-
-    @Override
-    public void onOrderUpdated(List<Order> orders) {
-
-    }
-
-    @Override
-    public void onTableUpdated(List<Table> tables) {
-
-    }
-
-    @Override
-    public void onRecommendedDrinksUpdated(List<RecommendedDrinks> recommendedDrinks) {
-        view.setRecommendedDrinks(recommendedDrinks);
     }
 }

@@ -22,9 +22,8 @@ import tomislavgazica.ferit.org.zavrsnirad.model.Order;
 import tomislavgazica.ferit.org.zavrsnirad.presentation.DrinkPresenter;
 import tomislavgazica.ferit.org.zavrsnirad.ui.drink.adapter.DrinkListAdapter;
 import tomislavgazica.ferit.org.zavrsnirad.ui.drink.listeners.OnDrinkClickListener;
-import tomislavgazica.ferit.org.zavrsnirad.ui.mainActivity.MainActionListener;
 
-public class DrinkFragment extends Fragment implements OnDrinkClickListener, DrinkContract.View, MainActionListener.Drink{
+public class DrinkFragment extends Fragment implements OnDrinkClickListener, DrinkContract.View{
 
     @BindView(R.id.itemsList)
     RecyclerView itemsList;
@@ -32,7 +31,6 @@ public class DrinkFragment extends Fragment implements OnDrinkClickListener, Dri
 
     private DrinkListAdapter drinkListAdapter;
     private DrinkContract.Presenter presenter;
-    private MainActionListener.Main actionListener;
 
     @Nullable
     @Override
@@ -58,29 +56,22 @@ public class DrinkFragment extends Fragment implements OnDrinkClickListener, Dri
         itemsList.setAdapter(drinkListAdapter);
     }
 
-    public void setActionListener(MainActionListener.Main actionListener) {
-        this.actionListener = actionListener;
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        presenter.onDestroy();
     }
 
     @Override
     public void onAddDrinkClick(String drinkId) {
         presenter.addDrinkToOrder(drinkId);
         presenter.getDrinkData();
-        actionListener.OnNewItem();
     }
 
     @Override
     public void onRemoveDrinkClick(String drinkId) {
         presenter.removeDrinkFromOrder(drinkId);
         presenter.getDrinkData();
-        actionListener.OnNewItem();
     }
 
     @Override
@@ -96,10 +87,5 @@ public class DrinkFragment extends Fragment implements OnDrinkClickListener, Dri
     @Override
     public void setCategories(List<Category> categories) {
         drinkListAdapter.setCategories(categories);
-    }
-
-    @Override
-    public void OnNewItem() {
-        presenter.getDrinkData();
     }
 }

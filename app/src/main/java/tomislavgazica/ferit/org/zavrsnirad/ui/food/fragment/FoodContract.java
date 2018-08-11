@@ -16,39 +16,20 @@ public interface FoodContract {
 
         void setFoods(List<Food> foods);
 
-        void setDrinks(List<Drink> drinks);
-
-        void setRecommendedDrinks(List<RecommendedDrinks> recommendedDrinks);
-
-        void setItemSizes(List<ItemSize> itemSizes);
-
-        void setOrder(Order order);
-
         void setCategories(List<Category> categories);
 
     }
 
     interface Presenter{
 
-        //Postavi pogled s kojim komuniciraš
-
         void setView(FoodContract.View view);
-
-        //Vrati pogledu hranu
-
-        void getFoodData();
-
-        //dodaj hranu u narudžbu
 
         void addItemToOrder(String id);
 
-        //Makni hranu iz narudžbe
-
         void removeItemFromOrder(String id);
 
-        //Metoda za prekid kada se pogled ne vidi
+        void setData();
 
-        void onDestroy();
     }
 
 }

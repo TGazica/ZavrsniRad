@@ -19,4 +19,5 @@ public interface ResponseModelCallbacks {
     void onOrderUpdated(List<Order> orders);
     void onTableUpdated(List<Table> tables);
     void onRecommendedDrinksUpdated(List<RecommendedDrinks> recommendedDrinks);
+    void onDataProcessed();
 }

@@ -43,7 +43,6 @@ import tomislavgazica.ferit.org.zavrsnirad.ui.drink.listeners.OnDrinkClickListen
 import tomislavgazica.ferit.org.zavrsnirad.ui.food.adapter.FoodSizesItemAdapter;
 import tomislavgazica.ferit.org.zavrsnirad.ui.food.listeners.OnFoodSizesClickListener;
 import tomislavgazica.ferit.org.zavrsnirad.ui.food.listeners.OnItemDetailClickListener;
-import tomislavgazica.ferit.org.zavrsnirad.ui.mainActivity.MainActionListener;
 
 public class ItemDetailFragment extends DialogFragment implements ItemDetailContract.View, OnDrinkClickListener, OnFoodSizesClickListener {
 
@@ -83,11 +82,6 @@ public class ItemDetailFragment extends DialogFragment implements ItemDetailCont
     private DrinkAdapter drinkAdapter;
     private FoodSizesItemAdapter foodSizesItemAdapter;
     private boolean areThereMultipleSizes = false;
-    private MainActionListener.Main actionListener;
-
-    public void setActionListener(MainActionListener.Main actionListener) {
-        this.actionListener = actionListener;
-    }
 
     @OnClick({R.id.itemDetailFoodConfirmChoice,R.id.itemDetailFoodCloseWindow})
     public void closeDetails(){
@@ -220,26 +214,22 @@ public class ItemDetailFragment extends DialogFragment implements ItemDetailCont
     @Override
     public void onAddDrinkClick(String id) {
         presenter.addItemToOrder(id);
-        actionListener.OnNewItem();
     }
 
     @Override
     public void onRemoveDrinkClick(String id) {
         presenter.removeItemFromOrder(id);
-        actionListener.OnNewItem();
     }
 
 
     @Override
     public void addItemToOrder(Food food) {
         presenter.addItemToOrder(food.getId());
-        actionListener.OnNewItem();
     }
 
     @Override
     public void removeItemFromOrder(Food food) {
         presenter.removeItemFromOrder(food.getId());
-        actionListener.OnNewItem();
     }
 
     @Override

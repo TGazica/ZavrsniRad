@@ -5,19 +5,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.FrameLayout;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import tomislavgazica.ferit.org.zavrsnirad.Constants;
 import tomislavgazica.ferit.org.zavrsnirad.R;
+import tomislavgazica.ferit.org.zavrsnirad.presentation.MainPresenter;
 import tomislavgazica.ferit.org.zavrsnirad.ui.drink.fragment.DrinkFragment;
 import tomislavgazica.ferit.org.zavrsnirad.ui.food.fragment.FoodFragment;
 import tomislavgazica.ferit.org.zavrsnirad.ui.navigation.fragment.NavigationFragment;
 import tomislavgazica.ferit.org.zavrsnirad.ui.navigation.listener.NavigationOnClickListener;
 import tomislavgazica.ferit.org.zavrsnirad.ui.order.fragment.OrderFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationOnClickListener, MainActionListener.Main {
+public class MainActivity extends AppCompatActivity implements NavigationOnClickListener, MainContract.View {
 
     private NavigationFragment navigationFragment;
     private FoodFragment foodFragment;
@@ -26,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private String currentMenu;
-    private boolean isSafe = false;
+    private MainPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,13 +33,15 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        presenter = new MainPresenter();
+        presenter.setView(this);
+
         initNavigationFragment();
         initOrderFragment();
     }
 
     private void initOrderFragment() {
         orderFragment = new OrderFragment();
-        orderFragment.setActionListener(this);
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -75,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
 
     private void initFoodMenuFragment() {
         foodFragment = new FoodFragment();
-        foodFragment.setActionListener(this);
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
     private void initDrinkFragment() {
         currentMenu = Constants.FIREBASE_DRINK;
         drinkFragment = new DrinkFragment();
-        drinkFragment.setActionListener(this);
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -107,17 +106,23 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
         fragmentTransaction.replace(R.id.menuFrameLayout, drinkFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-        isSafe = true;
     }
 
     @Override
-    public void OnNewItem() {
-        if (isSafe) {
-            if (currentMenu.equals(Constants.FIREBASE_DRINK)) {
-                drinkFragment.OnNewItem();
+    public void onDataUpdated() {
+        if (currentMenu != null){
+            if (currentMenu == Constants.FIREBASE_FOOD){
+
+
+
+            } else if (currentMenu == Constants.FIREBASE_DRINK){
+
+
+
             }
         }
-        orderFragment.OnNewItem();
+
+
 
     }
 }

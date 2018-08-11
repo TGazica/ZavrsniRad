@@ -9,6 +9,7 @@ import tomislavgazica.ferit.org.zavrsnirad.orderManager.OrderManager;
 
 public class App extends Application {
 
+    private static App instance;
     private static FirebaseAuth auth;
     private static FirebaseDatabase database;
 
@@ -16,22 +17,14 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+        instance = this;
+
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         OrderManager.getInstance();
 
     }
 
-    public static FirebaseAuth getFirebaseAuth(){
-        return auth;
-    }
 
-    public static FirebaseDatabase getFirebaseDatabase(){
-        return database;
-    }
-
-    public static Application getApplication(){
-        return getApplication();
-    }
 
 }
