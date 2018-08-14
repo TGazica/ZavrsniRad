@@ -10,29 +10,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import tomislavgazica.ferit.org.zavrsnirad.Constants;
 import tomislavgazica.ferit.org.zavrsnirad.R;
 import tomislavgazica.ferit.org.zavrsnirad.model.Category;
-import tomislavgazica.ferit.org.zavrsnirad.model.Drink;
 import tomislavgazica.ferit.org.zavrsnirad.model.Food;
-import tomislavgazica.ferit.org.zavrsnirad.model.ItemSize;
-import tomislavgazica.ferit.org.zavrsnirad.model.Order;
-import tomislavgazica.ferit.org.zavrsnirad.model.RecommendedDrinks;
 import tomislavgazica.ferit.org.zavrsnirad.presentation.FoodPresenter;
 import tomislavgazica.ferit.org.zavrsnirad.ui.food.adapter.FoodListAdapter;
 import tomislavgazica.ferit.org.zavrsnirad.ui.food.itemDetail.ItemDetailFragment;
 import tomislavgazica.ferit.org.zavrsnirad.ui.food.listeners.OnFoodGridClickListener;
-import tomislavgazica.ferit.org.zavrsnirad.ui.food.listeners.OnItemDetailClickListener;
 import tomislavgazica.ferit.org.zavrsnirad.ui.mainActivity.OnFirebaseDataChangeListener;
+import tomislavgazica.ferit.org.zavrsnirad.ui.mainActivity.OnItemAddedListener;
 
-public class FoodFragment extends Fragment implements FoodContract.View, OnFoodGridClickListener, OnItemDetailClickListener, OnFirebaseDataChangeListener {
+public class FoodFragment extends Fragment implements FoodContract.View, OnFoodGridClickListener, OnFirebaseDataChangeListener {
 
     @BindView(R.id.itemsList)
     RecyclerView itemsList;
@@ -40,6 +35,7 @@ public class FoodFragment extends Fragment implements FoodContract.View, OnFoodG
     private FoodListAdapter foodListAdapter;
     private FoodContract.Presenter presenter;
     private ItemDetailFragment itemDetailFragment;
+    private OnItemAddedListener.Main itemAddedListener;
     Unbinder unbinder;
 
     @Nullable
@@ -72,12 +68,18 @@ public class FoodFragment extends Fragment implements FoodContract.View, OnFoodG
         unbinder.unbind();
     }
 
+    public void setOnItemAddedListener(OnItemAddedListener.Main itemAddedListener){
+        this.itemAddedListener = itemAddedListener;
+    }
+
     @Override
     public void onGridItemClickListener(Food food) {
-        Toast.makeText(getContext(), food.getName() + "\n" + food.getGroupId(), Toast.LENGTH_SHORT).show();
         FragmentManager fm = getChildFragmentManager();
         itemDetailFragment = new ItemDetailFragment();
-        itemDetailFragment.setListener(this);
+        itemDetailFragment.setItemAddedListener(itemAddedListener);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Constants.ITEM_BUNDLE_KEY, food);
+        itemDetailFragment.setArguments(bundle);
         itemDetailFragment.show(fm, "itemDetail");
     }
 

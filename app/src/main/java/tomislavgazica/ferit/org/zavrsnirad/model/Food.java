@@ -1,8 +1,9 @@
 package tomislavgazica.ferit.org.zavrsnirad.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Food {
+public class Food implements Serializable{
 
     private String id;
     private String groupId;

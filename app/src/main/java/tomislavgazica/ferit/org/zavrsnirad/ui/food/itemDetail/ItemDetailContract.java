@@ -19,7 +19,13 @@ public interface ItemDetailContract {
 
         void setOrder(Order order);
 
-        void setItemRecommendedDrinks(List<Drink> drinks);
+        void initUi();
+
+        void initRecommendedDrinksUi(Order order, List<Drink> recDrinks);
+
+        void initMultipleItemSizes(List<Food> foods, List<ItemSize> sizes);
+
+        void initSingleItemSize();
 
     }
 
@@ -35,7 +41,9 @@ public interface ItemDetailContract {
 
         void removeItemFromOrder(String id);
 
-        void getItemRecommendedDrinks(List<RecommendedDrinks> recommendedDrinks, List<Drink> drink, Food food);
+        void getItemRecommendedDrinks(Food food);
+
+        void getFoodSizes(Food food);
 
     }
 

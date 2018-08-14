@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tomislavgazica.ferit.org.zavrsnirad.Constants;
+import tomislavgazica.ferit.org.zavrsnirad.dataHolder.DatabaseHolder;
 import tomislavgazica.ferit.org.zavrsnirad.model.Drink;
 import tomislavgazica.ferit.org.zavrsnirad.model.Food;
 import tomislavgazica.ferit.org.zavrsnirad.model.RecommendedDrinks;
@@ -28,6 +29,7 @@ public class ItemDetailPresenter implements ItemDetailContract.Presenter {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseUser user = auth.getCurrentUser();
     private OrderManager order;
+    private DatabaseHolder databaseHolder;
 
     private ItemDetailContract.View view;
 
@@ -40,6 +42,7 @@ public class ItemDetailPresenter implements ItemDetailContract.Presenter {
     public void setView(ItemDetailContract.View view) {
         order = OrderManager.getInstance();
         this.view = view;
+        databaseHolder = DatabaseHolder.getInstance();
     }
 
     @Override
@@ -47,7 +50,6 @@ public class ItemDetailPresenter implements ItemDetailContract.Presenter {
         storageRef.child(Constants.FIREBASE_IMAGES + "/" + user.getUid() + "/" + food.getImageUrl()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Log.v("uri", uri.toString());
                 view.setImage(uri);
 
             }
@@ -72,21 +74,46 @@ public class ItemDetailPresenter implements ItemDetailContract.Presenter {
     }
 
     @Override
-    public void getItemRecommendedDrinks(List<RecommendedDrinks> recommendedDrinks, List<Drink> drink, Food food) {
+    public void getItemRecommendedDrinks(Food food) {
         List<Drink> recDrinks = new ArrayList<>();
 
-        for (int i = 0; i < drink.size(); i++) {
-            for (int j = 0; j < recommendedDrinks.size(); j++) {
-                if (recommendedDrinks.get(j).getFoodId().equals(food.getId()) && recommendedDrinks.get(j).getDrinkId().equals(drink.get(i).getId())) {
-                    recDrinks.add(drink.get(i));
+        for (int i = 0; i < databaseHolder.getDrinks().size(); i++) {
+            for (int j = 0; j < databaseHolder.getRecommendedDrinks().size(); j++) {
+                if (databaseHolder.getRecommendedDrinks().get(j).getFoodId().equals(food.getId()) && databaseHolder.getRecommendedDrinks().get(j).getDrinkId().equals(databaseHolder.getDrinks().get(i).getId())) {
+                    recDrinks.add(databaseHolder.getDrinks().get(i));
                 }
             }
         }
 
         if (recDrinks != null) {
             if (!recDrinks.isEmpty()) {
-                view.setItemRecommendedDrinks(recDrinks);
+                view.initRecommendedDrinksUi(order.getOrder(), recDrinks);
             }
         }
+    }
+
+    @Override
+    public void getFoodSizes(Food food) {
+        List<Food> foods = new ArrayList<>();
+        boolean areThereMultipleSizes = false;
+
+        if (food.getGroupId() != null) {
+            if (!food.getGroupId().isEmpty()) {
+                if (!food.getGroupId().equals("")) {
+                    areThereMultipleSizes = true;
+                    for (int i = 0; i < databaseHolder.getFoods().size(); i++) {
+                        if (food.getGroupId().equals(databaseHolder.getFoods().get(i).getGroupId())) {
+                            foods.add(databaseHolder.getFoods().get(i));
+                        }
+                    }
+                }
+            }
+        }
+        if (!areThereMultipleSizes){
+            view.initSingleItemSize();
+        }else {
+            view.initMultipleItemSizes(foods, databaseHolder.getItemSizes());
+        }
+
     }
 }

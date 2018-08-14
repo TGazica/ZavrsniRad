@@ -22,8 +22,10 @@ import tomislavgazica.ferit.org.zavrsnirad.model.Order;
 import tomislavgazica.ferit.org.zavrsnirad.presentation.DrinkPresenter;
 import tomislavgazica.ferit.org.zavrsnirad.ui.drink.adapter.DrinkListAdapter;
 import tomislavgazica.ferit.org.zavrsnirad.ui.drink.listeners.OnDrinkClickListener;
+import tomislavgazica.ferit.org.zavrsnirad.ui.mainActivity.OnFirebaseDataChangeListener;
+import tomislavgazica.ferit.org.zavrsnirad.ui.mainActivity.OnItemAddedListener;
 
-public class DrinkFragment extends Fragment implements OnDrinkClickListener, DrinkContract.View{
+public class DrinkFragment extends Fragment implements OnDrinkClickListener, DrinkContract.View, OnFirebaseDataChangeListener, OnItemAddedListener.Child{
 
     @BindView(R.id.itemsList)
     RecyclerView itemsList;
@@ -31,6 +33,7 @@ public class DrinkFragment extends Fragment implements OnDrinkClickListener, Dri
 
     private DrinkListAdapter drinkListAdapter;
     private DrinkContract.Presenter presenter;
+    private OnItemAddedListener.Main onItemAddedListener;
 
     @Nullable
     @Override
@@ -54,6 +57,8 @@ public class DrinkFragment extends Fragment implements OnDrinkClickListener, Dri
         presenter.setView(this);
 
         itemsList.setAdapter(drinkListAdapter);
+
+        presenter.setData();
     }
 
     @Override
@@ -62,16 +67,22 @@ public class DrinkFragment extends Fragment implements OnDrinkClickListener, Dri
         unbinder.unbind();
     }
 
+    public void setOnItemAddedListener(OnItemAddedListener.Main onItemAddedListener){
+        this.onItemAddedListener = onItemAddedListener;
+    }
+
     @Override
     public void onAddDrinkClick(String drinkId) {
         presenter.addDrinkToOrder(drinkId);
-        presenter.getDrinkData();
+        presenter.getOrderedDrinks();
+        onItemAddedListener.onItemAddedToMenu();
     }
 
     @Override
     public void onRemoveDrinkClick(String drinkId) {
         presenter.removeDrinkFromOrder(drinkId);
-        presenter.getDrinkData();
+        presenter.getOrderedDrinks();
+        onItemAddedListener.onItemAddedToMenu();
     }
 
     @Override
@@ -87,5 +98,15 @@ public class DrinkFragment extends Fragment implements OnDrinkClickListener, Dri
     @Override
     public void setCategories(List<Category> categories) {
         drinkListAdapter.setCategories(categories);
+    }
+
+    @Override
+    public void updateFirebaseData() {
+        presenter.setData();
+    }
+
+    @Override
+    public void onItemAddedToMenu() {
+        presenter.getOrderedDrinks();
     }
 }

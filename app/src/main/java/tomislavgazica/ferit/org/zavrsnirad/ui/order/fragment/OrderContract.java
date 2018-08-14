@@ -19,8 +19,6 @@ public interface OrderContract {
 
         void setDrinks(List<Drink> drinks);
 
-        void setRecommendedDrinks(List<RecommendedDrinks> recommendedDrinks);
-
         void setItemSizes(List<ItemSize> itemSizes);
 
         void setOrder(Order order);

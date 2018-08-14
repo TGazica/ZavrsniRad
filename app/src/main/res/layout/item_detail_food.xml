@@ -78,7 +78,7 @@
         android:layout_width="320dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@id/itemDetailFoodConfirmChoice"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/itemDetailFoodMultipleSizes"
         app:layout_constraintTop_toBottomOf="@id/itemDetailFoodDescription"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -100,16 +100,5 @@
             android:scrollbars="vertical"/>
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/itemDetailFoodConfirmChoice"
-        android:background="@drawable/checkbox_circle"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:contentDescription="@string/confirm_choice"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"/>
 
 </android.support.constraint.ConstraintLayout>

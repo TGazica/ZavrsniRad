@@ -23,30 +23,25 @@ import tomislavgazica.ferit.org.zavrsnirad.model.Drink;
 import tomislavgazica.ferit.org.zavrsnirad.model.Food;
 import tomislavgazica.ferit.org.zavrsnirad.model.ItemSize;
 import tomislavgazica.ferit.org.zavrsnirad.model.Order;
-import tomislavgazica.ferit.org.zavrsnirad.model.RecommendedDrinks;
 import tomislavgazica.ferit.org.zavrsnirad.presentation.OrderPresenter;
-import tomislavgazica.ferit.org.zavrsnirad.ui.mainActivity.MainActionListener;
+import tomislavgazica.ferit.org.zavrsnirad.ui.mainActivity.OnFirebaseDataChangeListener;
+import tomislavgazica.ferit.org.zavrsnirad.ui.mainActivity.OnItemAddedListener;
 import tomislavgazica.ferit.org.zavrsnirad.ui.order.adapter.OrderDrinkAdapter;
 import tomislavgazica.ferit.org.zavrsnirad.ui.order.adapter.OrderFoodAdapter;
 import tomislavgazica.ferit.org.zavrsnirad.ui.order.listeners.OnOrderItemClickListener;
 
-public class OrderFragment extends Fragment implements OrderContract.View, OnOrderItemClickListener, MainActionListener.Order{
+public class OrderFragment extends Fragment implements OrderContract.View, OnOrderItemClickListener, OnFirebaseDataChangeListener, OnItemAddedListener.Child{
 
     Unbinder unbinder;
     @BindView(R.id.orderFoodHolder)
     RecyclerView orderFoodHolder;
     @BindView(R.id.orderDrinkHolder)
     RecyclerView orderDrinkHolder;
-    @BindView(R.id.orderCancelOrder)
-    Button orderCancelOrder;
-    @BindView(R.id.orderAddOrder)
-    Button orderAddOrder;
-
-    private MainActionListener.Main actionListener;
 
     private OrderContract.Presenter presenter;
     private OrderFoodAdapter orderFoodAdapter;
     private OrderDrinkAdapter orderDrinkAdapter;
+    private OnItemAddedListener.Main onItemAddedListener;
 
     @Nullable
     @Override
@@ -56,21 +51,20 @@ public class OrderFragment extends Fragment implements OrderContract.View, OnOrd
         return view;
     }
 
+    public void setOnItemAddedListener(OnItemAddedListener.Main onItemAddedListener){
+        this.onItemAddedListener = onItemAddedListener;
+    }
+
     @OnClick(R.id.orderAddOrder)
     public void addOrder(){
         presenter.uploadOrder();
-        actionListener.OnNewItem();
     }
 
     @OnClick(R.id.orderCancelOrder)
     public void cancelOrder(){
         presenter.removeAllItemsFromOrder();
-        actionListener.OnNewItem();
-    }
-
-
-    public void setActionListener(MainActionListener.Main actionListener) {
-        this.actionListener = actionListener;
+        presenter.getOrderData();
+        onItemAddedListener.onItemAddedToMenu();
     }
 
     @Override
@@ -110,42 +104,42 @@ public class OrderFragment extends Fragment implements OrderContract.View, OnOrd
     public void addFoodToOrder(Food food) {
         presenter.addItemToOrder(food.getId());
         presenter.getOrderData();
-        actionListener.OnNewItem();
+        onItemAddedListener.onItemAddedToMenu();
     }
 
     @Override
     public void removeFoodFromOrder(Food food) {
         presenter.removeItemFromOrder(food.getId());
         presenter.getOrderData();
-        actionListener.OnNewItem();
+        onItemAddedListener.onItemAddedToMenu();
     }
 
     @Override
     public void removeFoodFromOrderAll(Food food) {
         presenter.removeAllItemIdsFromOrder(food.getId());
         presenter.getOrderData();
-        actionListener.OnNewItem();
+        onItemAddedListener.onItemAddedToMenu();
     }
 
     @Override
     public void addDrinkToOrder(Drink drink) {
         presenter.addItemToOrder(drink.getId());
         presenter.getOrderData();
-        actionListener.OnNewItem();
+        onItemAddedListener.onItemAddedToMenu();
     }
 
     @Override
     public void removeDrinkFromOrder(Drink drink) {
         presenter.removeItemFromOrder(drink.getId());
         presenter.getOrderData();
-        actionListener.OnNewItem();
+        onItemAddedListener.onItemAddedToMenu();
     }
 
     @Override
     public void removeDrinkFromOrderAll(Drink drink) {
         presenter.removeAllItemIdsFromOrder(drink.getId());
         presenter.getOrderData();
-        actionListener.OnNewItem();
+        onItemAddedListener.onItemAddedToMenu();
     }
 
     @Override
@@ -156,11 +150,6 @@ public class OrderFragment extends Fragment implements OrderContract.View, OnOrd
     @Override
     public void setDrinks(List<Drink> drinks) {
         orderDrinkAdapter.setDrinks(drinks);
-    }
-
-    @Override
-    public void setRecommendedDrinks(List<RecommendedDrinks> recommendedDrinks) {
-
     }
 
     @Override
@@ -180,7 +169,12 @@ public class OrderFragment extends Fragment implements OrderContract.View, OnOrd
     }
 
     @Override
-    public void OnNewItem() {
+    public void updateFirebaseData() {
+        presenter.getOrderData();
+    }
+
+    @Override
+    public void onItemAddedToMenu() {
         presenter.getOrderData();
     }
 }

@@ -22,11 +22,13 @@ public interface DrinkContract {
 
         void setView(DrinkContract.View view);
 
-        void getDrinkData();
+        void getOrderedDrinks();
 
         void addDrinkToOrder(String id);
 
         void removeDrinkFromOrder(String id);
+
+        void setData();
     }
 
 }

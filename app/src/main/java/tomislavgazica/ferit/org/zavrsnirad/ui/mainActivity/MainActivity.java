@@ -16,7 +16,7 @@ import tomislavgazica.ferit.org.zavrsnirad.ui.navigation.fragment.NavigationFrag
 import tomislavgazica.ferit.org.zavrsnirad.ui.navigation.listener.NavigationOnClickListener;
 import tomislavgazica.ferit.org.zavrsnirad.ui.order.fragment.OrderFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationOnClickListener, MainContract.View {
+public class MainActivity extends AppCompatActivity implements NavigationOnClickListener, MainContract.View, OnItemAddedListener.Main {
 
     private NavigationFragment navigationFragment;
     private FoodFragment foodFragment;
@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
     private FragmentTransaction fragmentTransaction;
     private String currentMenu;
     private MainPresenter presenter;
+    private OnFirebaseDataChangeListener changeListener;
+    private OnItemAddedListener.Child orderListener;
+    private OnItemAddedListener.Child drinkListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
     private void initOrderFragment() {
         orderFragment = new OrderFragment();
 
+        orderFragment.setOnItemAddedListener(this);
+        orderListener = orderFragment;
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -77,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
     private void initFoodMenuFragment() {
         foodFragment = new FoodFragment();
 
+        foodFragment.setOnItemAddedListener(this);
+
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -100,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
         currentMenu = Constants.FIREBASE_DRINK;
         drinkFragment = new DrinkFragment();
 
+        drinkFragment.setOnItemAddedListener(this);
+        drinkListener = drinkFragment;
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -111,18 +120,31 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
     @Override
     public void onDataUpdated() {
         if (currentMenu != null){
-            if (currentMenu == Constants.FIREBASE_FOOD){
+            if (currentMenu.equals(Constants.FIREBASE_FOOD)){
+                changeListener = foodFragment;
+                changeListener.updateFirebaseData();
 
-
-
-            } else if (currentMenu == Constants.FIREBASE_DRINK){
-
-
-
+            } else if (currentMenu.equals(Constants.FIREBASE_DRINK)){
+                changeListener = drinkFragment;
+                changeListener.updateFirebaseData();
             }
         }
 
+        changeListener = orderFragment;
+        changeListener.updateFirebaseData();
 
+    }
+
+    @Override
+    public void onItemAddedToMenu() {
+
+        if (currentMenu != null){
+            if (currentMenu.equals(Constants.FIREBASE_DRINK)){
+                drinkListener.onItemAddedToMenu();
+            }
+        }
+
+        orderListener.onItemAddedToMenu();
 
     }
 }
