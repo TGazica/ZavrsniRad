@@ -10,7 +10,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import tomislavgazica.ferit.org.zavrsnirad.R;
 import tomislavgazica.ferit.org.zavrsnirad.model.Food;
-import tomislavgazica.ferit.org.zavrsnirad.ui.order.listeners.OnOrderClickListener;
 import tomislavgazica.ferit.org.zavrsnirad.ui.order.listeners.OnOrderItemClickListener;
 
 public class OrderFoodViewHolder extends RecyclerView.ViewHolder {

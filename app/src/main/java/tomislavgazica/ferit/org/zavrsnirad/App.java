@@ -1,12 +1,6 @@
 package tomislavgazica.ferit.org.zavrsnirad;
 
 import android.app.Application;
-import android.content.Context;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Locale;
 
 import tomislavgazica.ferit.org.zavrsnirad.model.Table;
 import tomislavgazica.ferit.org.zavrsnirad.orderManager.OrderManager;
@@ -14,8 +8,6 @@ import tomislavgazica.ferit.org.zavrsnirad.orderManager.OrderManager;
 public class App extends Application {
 
     private static App instance;
-    private static FirebaseAuth auth;
-    private static FirebaseDatabase database;
     private static Table table;
     private static boolean isTableSetUp = false;
     private static String lang = Constants.CROATIAN_LANGUAGE;
@@ -26,8 +18,6 @@ public class App extends Application {
 
         instance = this;
 
-        auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
         OrderManager.getInstance();
 
     }
