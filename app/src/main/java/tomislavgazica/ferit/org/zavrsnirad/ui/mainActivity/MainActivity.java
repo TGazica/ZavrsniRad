@@ -1,22 +1,29 @@
 package tomislavgazica.ferit.org.zavrsnirad.ui.mainActivity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.List;
+import java.util.Locale;
+
 import butterknife.ButterKnife;
+import tomislavgazica.ferit.org.zavrsnirad.App;
 import tomislavgazica.ferit.org.zavrsnirad.Constants;
 import tomislavgazica.ferit.org.zavrsnirad.R;
+import tomislavgazica.ferit.org.zavrsnirad.model.Table;
 import tomislavgazica.ferit.org.zavrsnirad.presentation.MainPresenter;
 import tomislavgazica.ferit.org.zavrsnirad.ui.drink.fragment.DrinkFragment;
 import tomislavgazica.ferit.org.zavrsnirad.ui.food.fragment.FoodFragment;
 import tomislavgazica.ferit.org.zavrsnirad.ui.navigation.fragment.NavigationFragment;
 import tomislavgazica.ferit.org.zavrsnirad.ui.navigation.listener.NavigationOnClickListener;
 import tomislavgazica.ferit.org.zavrsnirad.ui.order.fragment.OrderFragment;
+import tomislavgazica.ferit.org.zavrsnirad.ui.table.TablePicker;
 
-public class MainActivity extends AppCompatActivity implements NavigationOnClickListener, MainContract.View, OnItemAddedListener.Main {
+public class MainActivity extends AppCompatActivity implements NavigationOnClickListener, MainContract.View, OnItemAddedListener.Main, OnTableListener {
 
     private NavigationFragment navigationFragment;
     private FoodFragment foodFragment;
@@ -26,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
     private FragmentTransaction fragmentTransaction;
     private String currentMenu;
     private MainPresenter presenter;
+    private TablePicker tablePicker;
     private OnFirebaseDataChangeListener changeListener;
     private OnItemAddedListener.Child orderListener;
     private OnItemAddedListener.Child drinkListener;
@@ -33,6 +41,15 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String languageToLoad  = App.getLang();
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
@@ -103,6 +120,17 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
         }
     }
 
+    @Override
+    public void onNavigationLanguageClick() {
+        if (App.getLang().equals(Constants.CROATIAN_LANGUAGE)) {
+            App.setLang(Constants.ENGLIS_LANGUAGE);
+            recreate();
+        } else if (App.getLang().equals(Constants.ENGLIS_LANGUAGE)) {
+            App.setLang(Constants.CROATIAN_LANGUAGE);
+            recreate();
+        }
+    }
+
     private void initDrinkFragment() {
         currentMenu = Constants.FIREBASE_DRINK;
         drinkFragment = new DrinkFragment();
@@ -119,6 +147,14 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
 
     @Override
     public void onDataUpdated() {
+
+        if (!App.isTableSetUp()){
+            if (!App.isTableSetUp()){
+                presenter.getTables();
+                App.setTableSetUp(!App.isTableSetUp());
+            }
+        }
+
         if (currentMenu != null){
             if (currentMenu.equals(Constants.FIREBASE_FOOD)){
                 changeListener = foodFragment;
@@ -136,6 +172,21 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
     }
 
     @Override
+    public void setTables(List<Table> tables) {
+        fragmentManager = getSupportFragmentManager();
+        tablePicker = new TablePicker();
+        tablePicker.setData(tables, getApplicationContext(), this);
+
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.menuFrameLayout, tablePicker);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+    }
+
+    @Override
     public void onItemAddedToMenu() {
 
         if (currentMenu != null){
@@ -146,5 +197,10 @@ public class MainActivity extends AppCompatActivity implements NavigationOnClick
 
         orderListener.onItemAddedToMenu();
 
+    }
+
+    @Override
+    public void tableSet() {
+        getSupportFragmentManager().beginTransaction().remove(tablePicker).commit();
     }
 }
