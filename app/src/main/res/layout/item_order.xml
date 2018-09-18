@@ -1,96 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="30dp"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginStart="4dp"
-    android:layout_marginEnd="4dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
-    android:background="#757575">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/itemName"
-        android:text="@string/drink_name"
-        android:textSize="12sp"
-        android:textColor="#FFF"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="8dp"/>
-
-    <TextView
-        android:id="@+id/itemSize"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/itemName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:textSize="12sp"
-        android:textColor="#FFF"/>
-
-    <TextView
-        android:id="@+id/itemPrice"
-        android:text="@string/item_drink_price"
-        android:textSize="12sp"
-        android:textColor="#FFF"
-        app:layout_constraintEnd_toStartOf="@id/itemRemove"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <ImageView
-        android:id="@+id/itemAdd"
-        android:background="@drawable/plus_circle"
-        android:backgroundTint="#FFF"
-        android:contentDescription="@string/drink_item_add_drink"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        app:layout_constraintEnd_toStartOf="@id/itemRemoveAllItems"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="8dp"/>
-
-    <TextView
-        android:id="@+id/itemNumber"
-        android:text="@string/item_number_hint"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:textColor="#FFF"
-        android:gravity="center"
-        android:textSize="12sp"
+        android:layout_marginBottom="4dp"
         android:layout_marginEnd="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/itemAdd" />
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="#757575">
 
-    <ImageView
-        android:id="@+id/itemRemove"
-        android:background="@drawable/minus_circle"
-        android:backgroundTint="#FFF"
-        android:contentDescription="@string/drink_item_add_drink"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        app:layout_constraintEnd_toStartOf="@id/itemNumber"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="8dp"/>
+        <TextView
+            android:id="@+id/itemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:layout_marginTop="2dp"
+            android:text="@string/drink_name"
+            android:textColor="#FFF"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@id/itemSize"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/itemRemoveAllItems"
-        android:background="@drawable/close"
-        android:backgroundTint="#FFF"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+            android:id="@+id/itemSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/itemSizeText"
+            android:textColor="#FFF"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/itemName"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/itemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/item_drink_price"
+            android:textColor="#FFF"
+            android:textSize="12sp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@id/itemAdd"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemName" />
+
+        <ImageView
+            android:id="@+id/itemAdd"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/plus_circle"
+            android:backgroundTint="#FFF"
+            android:contentDescription="@string/drink_item_add_drink"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/itemNumber"
+            app:layout_constraintStart_toEndOf="@id/itemPrice"
+            app:layout_constraintTop_toBottomOf="@id/itemName" />
+
+        <TextView
+            android:id="@+id/itemNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="@string/item_number_hint"
+            android:textColor="#FFF"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@id/itemRemove"
+            app:layout_constraintStart_toEndOf="@id/itemAdd"
+            app:layout_constraintTop_toBottomOf="@id/itemName" />
+
+        <ImageView
+            android:id="@+id/itemRemove"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/minus_circle"
+            android:backgroundTint="#FFF"
+            android:contentDescription="@string/drink_item_add_drink"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/itemRemoveAllItems"
+            app:layout_constraintStart_toEndOf="@id/itemNumber"
+            app:layout_constraintTop_toBottomOf="@id/itemName" />
+
+        <ImageView
+            android:id="@+id/itemRemoveAllItems"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/close"
+            android:backgroundTint="#FFF"
+            app:layout_constraintHorizontal_bias="-0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/itemRemove"
+            app:layout_constraintTop_toBottomOf="@id/itemName" />
 
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</RelativeLayout>

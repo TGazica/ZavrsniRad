@@ -45,7 +45,6 @@ public class OrderFoodViewHolder extends RecyclerView.ViewHolder {
         this.food = food;
 
         itemName.setText(this.food.getName());
-        itemPrice.setText(Double.toString(this.food.getPrice()));
 
     }
 
@@ -55,6 +54,7 @@ public class OrderFoodViewHolder extends RecyclerView.ViewHolder {
 
     public void setNumberOfItem(int numOfItems){
         itemNumber.setText(Integer.toString(numOfItems));
+        itemPrice.setText(Double.toString(this.food.getPrice()*numOfItems) + " kn");
     }
 
     @OnClick(R.id.itemAdd)

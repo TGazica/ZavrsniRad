@@ -71,7 +71,7 @@ public class FoodSizesViewHolder extends RecyclerView.ViewHolder {
             itemDetailFoodItemSingleNumber = itemView.findViewById(R.id.itemDetailFoodItemSingleNumber);
             itemDetailFoodAddItemSingle = itemView.findViewById(R.id.itemDetailFoodAddItemSingle);
 
-            itemDetailSingleSizePrice.setText(Double.toString(food.getPrice()));
+            itemDetailSingleSizePrice.setText(Double.toString(food.getPrice()) + " kn");
         } else {
             itemDetailFirstSizeName = itemView.findViewById(R.id.itemDetailFirstSizeName);
             itemDetailFirstSizePrice = itemView.findViewById(R.id.itemDetailFirstSizePrice);
@@ -80,7 +80,7 @@ public class FoodSizesViewHolder extends RecyclerView.ViewHolder {
             itemDetailFoodAddItemFirstSize = itemView.findViewById(R.id.itemDetailFoodAddItemFirstSize);
 
             itemDetailFirstSizeName.setText(size);
-            itemDetailFirstSizePrice.setText(Double.toString(food.getPrice()));
+            itemDetailFirstSizePrice.setText(Double.toString(food.getPrice()) + " kn");
         }
     }
 

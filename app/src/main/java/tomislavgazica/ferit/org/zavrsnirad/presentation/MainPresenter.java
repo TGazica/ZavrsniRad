@@ -40,6 +40,11 @@ public class MainPresenter implements MainContract.Presenter, FirebaseCallbacks,
     }
 
     @Override
+    public void getTables() {
+        view.setTables(databaseHolder.getTables());
+    }
+
+    @Override
     public void onNewItem(DataSnapshot dataSnapshot) {
         responseModel.addItems(dataSnapshot);
     }

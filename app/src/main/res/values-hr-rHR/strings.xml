@@ -34,4 +34,6 @@
     <string name="your_drinks">Vaša pića:</string>
     <string name="add_order">Dodaj narudžbu</string>
     <string name="cancel_order">Obriši narudžbu</string>
+    <string name="please_chose_table">Odaberite stol:</string>
+    <string name="confirm">Potvrdi</string>
 </resources>

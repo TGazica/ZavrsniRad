@@ -15,4 +15,7 @@ public class Constants {
 
     public static final String ITEM_BUNDLE_KEY = "item bundle key";
 
+    public static final String ENGLIS_LANGUAGE = "en";
+    public static final String CROATIAN_LANGUAGE = "hr";
+
 }

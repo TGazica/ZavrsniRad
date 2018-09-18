@@ -33,4 +33,7 @@
     <string name="your_drinks">Your drinks:</string>
     <string name="add_order">Add order</string>
     <string name="cancel_order">Cancel order</string>
+    <string name="please_chose_table">Please chose table:</string>
+    <string name="confirm">Confirm</string>
+    <string name="itemSizeText">small</string>
 </resources>

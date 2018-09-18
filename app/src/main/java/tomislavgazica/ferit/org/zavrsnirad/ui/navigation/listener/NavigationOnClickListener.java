@@ -6,4 +6,6 @@ public interface NavigationOnClickListener {
 
     void onNavigationDrinkClick();
 
+    void onNavigationLanguageClick();
+
 }

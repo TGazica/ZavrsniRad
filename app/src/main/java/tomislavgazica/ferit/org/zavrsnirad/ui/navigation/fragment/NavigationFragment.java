@@ -53,13 +53,18 @@ public class NavigationFragment extends Fragment {
     }
 
     @OnClick({R.id.navigationFood, R.id.navigationFoodImage})
-    public void onFoodClick(){
+    public void onFoodClick() {
         listener.onNavigationFoodClick();
     }
 
     @OnClick({R.id.navigationDrink, R.id.navigationDrinkImage})
-    public void onDrinkClick(){
+    public void onDrinkClick() {
         listener.onNavigationDrinkClick();
+    }
+
+    @OnClick(R.id.navigationLanguageImage)
+    public void onLanguageClick() {
+        listener.onNavigationLanguageClick();
     }
 
     @Override

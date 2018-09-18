@@ -45,13 +45,13 @@ public class OrderDrinkViewHolder extends RecyclerView.ViewHolder {
         this.drink = drink;
 
         itemName.setText(this.drink.getName());
-        itemPrice.setText(Double.toString(this.drink.getPrice()));
         itemSize.setText(Double.toString(this.drink.getSize()));
 
     }
 
     public void setNumberOfItem(int numOfItems) {
         itemNumber.setText(Integer.toString(numOfItems));
+        itemPrice.setText(Double.toString(this.drink.getPrice()*numOfItems) + "kn");
     }
 
     @OnClick(R.id.itemAdd)
