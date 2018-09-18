@@ -25,6 +25,8 @@ public interface OrderContract {
 
         void setCategories(List<Category> categories);
 
+        void setFullPrice(double fullPrice);
+
     }
 
     interface Presenter {
@@ -43,7 +45,7 @@ public interface OrderContract {
 
         void removeAllItemIdsFromOrder(String id);
 
-
+        void getFullPrice();
 
     }
 }

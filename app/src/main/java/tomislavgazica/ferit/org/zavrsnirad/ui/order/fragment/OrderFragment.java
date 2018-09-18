@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -30,13 +30,15 @@ import tomislavgazica.ferit.org.zavrsnirad.ui.order.adapter.OrderDrinkAdapter;
 import tomislavgazica.ferit.org.zavrsnirad.ui.order.adapter.OrderFoodAdapter;
 import tomislavgazica.ferit.org.zavrsnirad.ui.order.listeners.OnOrderItemClickListener;
 
-public class OrderFragment extends Fragment implements OrderContract.View, OnOrderItemClickListener, OnFirebaseDataChangeListener, OnItemAddedListener.Child{
+public class OrderFragment extends Fragment implements OrderContract.View, OnOrderItemClickListener, OnFirebaseDataChangeListener, OnItemAddedListener.Child {
 
     Unbinder unbinder;
     @BindView(R.id.orderFoodHolder)
     RecyclerView orderFoodHolder;
     @BindView(R.id.orderDrinkHolder)
     RecyclerView orderDrinkHolder;
+    @BindView(R.id.orderFullPrice)
+    TextView orderFullPrice;
 
     private OrderContract.Presenter presenter;
     private OrderFoodAdapter orderFoodAdapter;
@@ -51,17 +53,17 @@ public class OrderFragment extends Fragment implements OrderContract.View, OnOrd
         return view;
     }
 
-    public void setOnItemAddedListener(OnItemAddedListener.Main onItemAddedListener){
+    public void setOnItemAddedListener(OnItemAddedListener.Main onItemAddedListener) {
         this.onItemAddedListener = onItemAddedListener;
     }
 
     @OnClick(R.id.orderAddOrder)
-    public void addOrder(){
+    public void addOrder() {
         presenter.uploadOrder();
     }
 
     @OnClick(R.id.orderCancelOrder)
-    public void cancelOrder(){
+    public void cancelOrder() {
         presenter.removeAllItemsFromOrder();
         presenter.getOrderData();
         onItemAddedListener.onItemAddedToMenu();
@@ -161,11 +163,17 @@ public class OrderFragment extends Fragment implements OrderContract.View, OnOrd
     public void setOrder(Order order) {
         orderFoodAdapter.setOrder(order);
         orderDrinkAdapter.setOrder(order);
+        presenter.getFullPrice();
     }
 
     @Override
     public void setCategories(List<Category> categories) {
 
+    }
+
+    @Override
+    public void setFullPrice(double fullPrice) {
+        orderFullPrice.setText(Double.toString(fullPrice) + "kn");
     }
 
     @Override

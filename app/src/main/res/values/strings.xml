@@ -36,4 +36,5 @@
     <string name="please_chose_table">Please chose table:</string>
     <string name="confirm">Confirm</string>
     <string name="itemSizeText">small</string>
+    <string name="price">Price:</string>
 </resources>

@@ -43,10 +43,6 @@ public class FirebaseManager implements ValueEventListener {
         databaseReference.addValueEventListener(this);
     }
 
-    public void removeListener() {
-        databaseReference.removeEventListener(this);
-    }
-
     public void setFirebaseCallbacks(FirebaseCallbacks firebaseCallbacks) {
         this.firebaseCallbacks = firebaseCallbacks;
     }

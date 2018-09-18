@@ -44,6 +44,30 @@
 
     </ScrollView>
 
+    <TextView
+        android:id="@+id/orderFullPriceText"
+        app:layout_constraintBottom_toTopOf="@id/orderCancelOrder"
+        android:text="@string/price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintEnd_toStartOf="@id/orderFullPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/orderFullPrice"
+        app:layout_constraintBottom_toTopOf="@id/orderCancelOrder"
+        app:layout_constraintStart_toEndOf="@id/orderFullPriceText"
+        android:layout_marginStart="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="12dp"/>
+
     <Button
         android:id="@+id/orderCancelOrder"
         android:text="@string/cancel_order"

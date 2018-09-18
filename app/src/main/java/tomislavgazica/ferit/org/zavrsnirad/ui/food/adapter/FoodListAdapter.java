@@ -60,16 +60,12 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListViewHolder> {
         this.onFoodGridClickListener = onFoodGridClickListener;
     }
 
-    //Postavljane određenog pogleda
-
     @NonNull
     @Override
     public FoodListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food_category, parent, false);
         return new FoodListViewHolder(view, context, onFoodGridClickListener);
     }
-
-    //Prosljeđivanje podatka u držač pogleda
 
     @Override
     public void onBindViewHolder(@NonNull FoodListViewHolder holder, int position) {

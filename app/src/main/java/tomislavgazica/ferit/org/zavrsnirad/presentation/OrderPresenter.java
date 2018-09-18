@@ -56,4 +56,28 @@ public class OrderPresenter implements OrderContract.Presenter {
     public void removeAllItemIdsFromOrder(String id) {
         order.removeAllOfItemFromOrder(id);
     }
+
+    @Override
+    public void getFullPrice() {
+
+        double fullPrice = 0;
+
+        for (int i = 0; i < order.getOrder().getOrderedItemsIds().size(); i++) {
+            for (int j = 0; j < databaseHolder.getFoods().size(); j++) {
+                if (order.getOrder().getOrderedItemsIds().get(i).equals(databaseHolder.getFoods().get(j).getId())) {
+                    fullPrice += databaseHolder.getFoods().get(j).getPrice();
+                }
+
+
+            }
+
+            for (int j = 0; j < databaseHolder.getDrinks().size(); j++) {
+                if (order.getOrder().getOrderedItemsIds().get(i).equals(databaseHolder.getDrinks().get(j).getId())) {
+                    fullPrice += databaseHolder.getDrinks().get(j).getPrice();
+                }
+            }
+        }
+
+        view.setFullPrice(fullPrice);
+    }
 }
